@@ -1,0 +1,103 @@
+// Indexed Character Printing in an Array
+class Main {
+    public static void main(String[] args) {
+        int [] x = {1,2,3,4,5};
+        System.out.println(x[4]);
+    }
+}
+//Ordered Character printing in an Array
+class Main {
+    public static void main(String[] args) {
+        int [] x = {1,2,3,4,5};
+        for(int i = 0; i< x.length;i++) {
+        System.out.println(x[i]);
+        }
+    }
+}
+//Sum of Array
+class Main {
+    public static void main(String[] args) {
+        int [] x = {1,2,3,4,5};
+        int sum = 0;
+        for(int i = 0; i< x.length;i++) {
+            sum += x[i];
+        System.out.println(sum);
+        }
+    }
+}
+//Arithmetic operators
+class Main {
+    public static void main(String[] args) {
+        int age = 19;
+        double cgpa = 7.2;
+        long height = 183;
+        float weight = 60;
+        System.out.println(age + age);
+        System.out.println(height - weight);
+        System.out.println(cgpa * age);
+        System.out.println(height / age);
+        System.out.println(++age);
+        System.out.println(--weight);
+    }
+}
+//Simple calculator
+import java.util.Scanner;
+public class Calculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        double num1 = scanner.nextDouble();
+        System.out.print("Enter operator (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+        System.out.print("Enter second number: ");
+        double num2 = scanner.nextDouble();
+        double result;
+        switch (operator) {
+            case '+':
+                result = num1 + num2;
+                System.out.println("Result: " + result);
+                break;
+            case '-':
+                result = num1 - num2;
+                System.out.println("Result: " + result);
+                break;
+            case '*':
+                result = num1 * num2;
+                System.out.println("Result: " + result);
+                break;
+            case '/':
+                if (num2 != 0) {
+                    result = num1 / num2;
+                    System.out.println("Result: " + result);
+                } else {
+                    System.out.println("Error: Cannot divide by zero.");
+                }
+                break;
+            default:
+                System.out.println("Error: Invalid operator.");
+        }
+        scanner.close();
+    }
+}
+//Type casting
+public class DigitSum {
+    public static void main(String[] args) {
+        String x = "125";
+        String y = "134";
+        int sum = Integer.parseInt(x) + Integer.parseInt(y);
+        System.out.println("The sum is: " + sum);
+    }
+}  
+//comparison operators
+public class ComparisonDemo {
+    public static void main(String[] args) {
+        int age = 19;
+        int weight = 60;
+        System.out.println("a > b  : " + (age > weight));
+        System.out.println("a < b  : " + (age < weight));
+        System.out.println("a >= 19: " + (age >= 19));
+        System.out.println("a <= b : " + (age <= weight));
+        System.out.println("a == b : " + (age == weight));
+
+    }
+}
