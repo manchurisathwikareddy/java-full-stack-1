@@ -1,0 +1,318 @@
+// Using if and else
+//Username and password saperate validation
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args) {
+        String userName = "Admin@gmail.com";
+        String password = "Admin@123";
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter username:");
+        String uname = sc.nextLine().trim();
+        System.out.println("Enter your password:");
+        String pass = sc.nextLine().trim();
+        if (userName.equalsIgnoreCase(uname) && password.equals(pass)) {
+            System.out.println("Welcome to homepage");
+        } 
+        else {
+            if (!userName.equalsIgnoreCase(uname)) {
+                System.out.println("Invalid Username");
+            }
+            if (!password.equals(pass)) {
+                System.out.println("Invalid Password");
+            }
+        }
+        
+        sc.close();
+    }
+}
+// Odd or Even
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter num:");
+        Integer num = sc.nextInt();
+        if(num %2 == 0) {
+            System.out.print("Even Number");
+        } else {
+            System.out.print("Odd Number");
+        }
+        sc.close();
+    }
+}
+// Username and password validation
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args) {
+        String userName = "Admin@gmail.com";
+        String password = "Admin@123";
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter username:");
+        String uname = sc.nextLine().trim();
+        System.out.println("Enter your password:");
+        String pass = sc.nextLine().trim();
+        if (userName.equalsIgnoreCase(uname) && password.equals(pass)) {
+            System.out.println("Welcome to homepage");
+        } 
+        else {
+            if (!userName.equalsIgnoreCase(uname)) {
+                System.out.println("Invalid Username");
+            }   
+            if (!password.equals(pass)) {
+                System.out.println("Invalid Password");
+            }
+        }
+        sc.close();
+    }
+}
+//Calculator using switch case and while
+import java.util.Scanner;
+public class Calculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Enter first number: ");
+            double num1 = scanner.nextDouble();
+            System.out.print("Enter operator (+, -, *, /): ");
+            char operator = scanner.next().charAt(0);
+            System.out.print("Enter second number: ");
+            double num2 = scanner.nextDouble();
+            double result;
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    System.out.println("Result: " + result);
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    System.out.println("Result: " + result);
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    System.out.println("Result: " + result);
+                    break;
+                case '/':
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                        System.out.println("Result: " + result);
+                    } else {
+                        System.out.println("Error: Cannot divide by zero.");
+                    }
+                    break;
+                default:
+                    System.out.println("Error: Invalid operator.");
+            }
+            System.out.print("Do you want to continue? (y/n): ");
+            char choice = scanner.next().charAt(0);
+            if (choice == 'n' || choice == 'N') {
+                break;
+            }
+        }
+        scanner.close();
+        System.out.println("Calculator Closed.");
+    }
+}
+// for loop
+//Printing number from 1-100 even and odd saperately using for loop
+public class EvenOdd {
+    public static void main(String[] args) {
+        System.out.println("\nEven Numbers (1-100):");
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println("\n\nOdd Numbers (1-100):");
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 != 0) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+}
+//Adding data in an Array using for loop
+import java.util.Arrays;
+class Main {
+    public static void main(String[] args) {
+        String[] classNames = {"pushpa", "bal", "babblu"};
+        String newStr = "venky"; 
+        String[] newArray = Arrays.copyOf(classNames, classNames.length + 1);
+        newArray[newArray.length - 1] = newStr;
+        System.out.println(newArray[3]);
+        System.out.print("Array: ");
+        for(int i = 0; i < newArray.length; i++) {
+            System.out.print(newArray[i] + " ");
+        }
+    }
+}
+//By using 2D Array 3 * 3 matrix manual input
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] matrix = new int[3][3];
+        System.out.println("Enter 9 numbers for the 3x3 matrix:");
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                System.out.print("Position [" + row + "][" + col + "]: ");
+                matrix[row][col] = sc.nextInt();
+            }
+        }
+        System.out.println("\nYour 3x3 Matrix:");
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                System.out.print(matrix[row][col] + "\t");
+            }
+            System.out.println();
+        }
+        sc.close();
+    }
+}
+// By using 2D Array 2 * 2 Matrix in code Entry
+import java.util.Scanner;
+public class Matrix2x2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] matrix = new int[2][2];
+        System.out.println("Enter 4 values for a 2x2 matrix:");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                System.out.print("Enter value for [" + i + "][" + j + "]: ");
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("\nYour 2x2 Matrix:");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+        }
+        
+        sc.close();
+    }
+}
+//1D Array using Create , Read , Update , Delete
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] items = new String[10];
+        int count = 0;
+        while (true) {
+            System.out.println("1. Create (Add Item)");
+            System.out.println("2. Read (View All)");
+            System.out.println("3. Update (Change Item)");
+            System.out.println("4. Delete (Remove Item)");
+            System.out.println("5. Exit");
+            System.out.print("Select an option: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    if (count < items.length) {
+                        System.out.print("Enter name to add: ");
+                        items[count++] = sc.nextLine();
+                        System.out.println("Added successfully!");
+                    } else {
+                        System.out.println("Array is full!");
+                    }
+                    break;
+                case 2:
+                    System.out.println("Current Items:");
+                    for (int i = 0; i < count; i++) {
+                        System.out.println(i + ": " + items[i]);
+                    }
+                    break;
+                case 3:
+                    System.out.print("Enter index to update: ");
+                    int upIdx = sc.nextInt();
+                    sc.nextLine();
+                    if (upIdx >= 0 && upIdx < count) {
+                        System.out.print("Enter new name: ");
+                        items[upIdx] = sc.nextLine();
+                        System.out.println("Updated!");
+                    } else {
+                        System.out.println("Invalid index!");
+                    }
+                    break;
+                case 4:
+                    System.out.print("Enter index to delete: ");
+                    int delIdx = sc.nextInt();
+                    if (delIdx >= 0 && delIdx < count) {
+                        for (int i = delIdx; i < count - 1; i++) {
+                            items[i] = items[i + 1];
+                        }
+                        items[--count] = null;
+                        System.out.println("Deleted successfully!");
+                    } else {
+                        System.out.println("Invalid index!");
+                    }
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+}
+//2D Array using Create , Read , Update , Delete
+import java.util.Scanner;
+public class TwoDArrayCRUD {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] data = new int[10][2]; 
+        int rowCount = 0;
+        while (true) {
+            System.out.println("1. Create (Add Row)");
+            System.out.println("2. Read (View All)");
+            System.out.println("3. Update (Change Value)");
+            System.out.println("4. Delete (Remove Row)");
+            System.out.println("5. Exit");
+            System.out.print("Select: ");
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    if (rowCount < data.length) {
+                        System.out.print("Enter Student ID: ");
+                        data[rowCount][0] = sc.nextInt();
+                        System.out.print("Enter Score: ");
+                        data[rowCount][1] = sc.nextInt();
+                        rowCount++;
+                    } else {
+                        System.out.println("Table is full!");
+                    }
+                    break;
+                case 2:
+                    System.out.println("ID\tScore");
+                    for (int i = 0; i < rowCount; i++) {
+                        System.out.println(data[i][0] + "\t" + data[i][1]);
+                    }
+                    break;
+                case 3:
+                    System.out.print("Enter row index to update (0-" + (rowCount-1) + "): ");
+                    int upIdx = sc.nextInt();
+                    if (upIdx >= 0 && upIdx < rowCount) {
+                        System.out.print("Enter new Score: ");
+                        data[upIdx][1] = sc.nextInt();
+                        System.out.println("Updated!");
+                    }
+                    break;
+                case 4:
+                    System.out.print("Enter row index to delete: ");
+                    int delIdx = sc.nextInt();
+                    if (delIdx >= 0 && delIdx < rowCount) {
+                        for (int i = delIdx; i < rowCount - 1; i++) {
+                            data[i] = data[i + 1];
+                        }
+                        rowCount--;
+                        System.out.println("Deleted!");
+                    }
+                    break;
+                case 5:
+                    System.exit(0);
+            }
+        }
+    }
+}
