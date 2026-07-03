@@ -1,0 +1,317 @@
+//Making simple claculator using Method
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        int num1 = scanner.nextInt();
+        System.out.print("Enter an operator (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+        System.out.print("Enter second number: ");
+        int num2 = scanner.nextInt();
+        int result = calculator(num1, num2, operator);
+        System.out.println("Result: " + result);
+        scanner.close();
+    }
+    public static int calculator(int a, int b, char operator){
+        switch(operator) {
+            case '+': return a + b;
+            case '-': return a - b;
+            case '*': return a * b;
+            case '/': 
+                if (b == 0) {
+                    System.out.println("Error: Division by zero");
+                    return 0;
+                }
+                return a / b;
+            default:
+                System.out.println("Invalid operator");
+                return 0;
+        }
+    }
+}
+//Finding owels in the name given as string by converting onto characters
+import java.util.Scanner;
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a name: ");
+        String name = scanner.nextLine();
+        System.out.println("character count: " + name.length());
+        System.out.print("Vowels in the name: ");
+        for (int i = 0; i < name.length(); i++) {
+            char ch = name.charAt(i);
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+                ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') {
+                System.out.print(ch + " ");
+            }
+        }
+        System.out.println();
+
+        scanner.close();
+    }
+}
+//Factor Numbers
+import java.util.Scanner;
+public class FactorManager {
+    public static void findFactors(int n) {
+        System.out.print("Factors are: ");
+        for (int i = 1; i <= n; i++) {
+            if (n % i == 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int inputNumber = sc.nextInt();
+        findFactors(inputNumber);
+
+        sc.close();
+    }
+}
+//Finding Factorials and prime numbers
+import java.util.Scanner;
+public class MathLogic {
+    public static long calculateFactorial(int n) {
+        if (n < 0) return -1;
+        long result = 1;
+        for (int i = 1; i <= n; i++) {
+            result *= i;
+        }
+        return result;
+    }
+    public static boolean checkIsPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number");
+        int num = sc.nextInt();
+        long factResult = calculateFactorial(num);
+        System.out.println("The Factorial of " + num + " is: " + factResult);
+        boolean primeResult = checkIsPrime(num);
+        if (primeResult) {
+            System.out.println(num + " is a Prime number.");
+        } else {
+            System.out.println(num + " is NOT a Prime number.");
+        }
+        sc.close();
+    }
+}
+//Adding matrix
+import java.util.Scanner;
+public class MatrixManager {
+    public static int[][] createMatrix(int rows, int cols, Scanner sc, String name) {
+        int[][] matrix = new int[rows][cols];
+        System.out.println("Enter data for " + name + ":");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print("Position [" + i + "][" + j + "]: ");
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        return matrix;
+    }
+    public static int[][] addMatrices(int[][] m1, int[][] m2) {
+        int rows = m1.length;
+        int cols = m1[0].length;
+        int[][] result = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[i][j] = m1[i][j] + m2[i][j];
+            }
+        }
+        return result;
+    }
+    public static void displayMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.print(val + "\t");
+            }
+            System.out.println();
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int rows = 2, cols = 2;
+        int[][] matrix1 = createMatrix(rows, cols, sc, "Matrix A");
+        int[][] matrix2 = createMatrix(rows, cols, sc, "Matrix B");
+        int[][] sum = addMatrices(matrix1, matrix2);
+        System.out.println("\nThe Resulting Sum Matrix is:");
+        displayMatrix(sum);
+
+        sc.close();
+    }
+}
+//Transverse matrix
+import java.util.Scanner;
+public class MatrixTranspose {
+    public static int[][] readMatrix(Scanner sc) {
+        int[][] matrix = new int[3][3];
+        System.out.println("Enter 9 elements for the 3x3 matrix:");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print("Position [" + i + "][" + j + "]: ");
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        return matrix;
+    }
+    public static int[][] getTranspose(int[][] original) {
+        int[][] transposed = new int[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                transposed[j][i] = original[i][j];
+            }
+        }
+        return transposed;
+    }
+    public static void printMatrix(int[][] matrix) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] myMatrix = readMatrix(sc);
+        int[][] transposedMatrix = getTranspose(myMatrix);
+        System.out.println("\nOriginal Matrix:");
+        printMatrix(myMatrix);
+        System.out.println("\nTransposed Matrix:");
+        printMatrix(transposedMatrix);
+        sc.close();
+    }
+}
+// Multiplication of matrices only 1st row and column
+import java.util.Scanner;
+public class SpecificMultiplication {
+    public static int[][] getMatrix(Scanner sc, String name) {
+        int[][] matrix = new int[3][3];
+        System.out.println("Enter 9 values for " + name + ":");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        return matrix;
+    }
+    public static int multiplyFirstRowCol(int[][] A, int[][] B) {
+        int result = 0;
+        for (int i = 0; i < 3; i++) {
+            result += A[0][i] * B[i][0];
+        }
+        return result;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] matrixA = getMatrix(sc, "Matrix A");
+        int[][] matrixB = getMatrix(sc, "Matrix B");
+        int dotProduct = multiplyFirstRowCol(matrixA, matrixB);
+        System.out.println("\n(1st Row A * 1st Col B): " + dotProduct);
+        
+        sc.close();
+    }
+}
+//Removing duplicate in an Array
+import java.util.*;
+public class DuplicateRemover {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the size of the array: ");
+        int size = sc.nextInt();
+        int[] originalArray = new int[size];
+        System.out.println("Enter " + size + " elements:");
+        for (int i = 0; i < size; i++) {
+            originalArray[i] = sc.nextInt();
+        }
+        Set<Integer> set = new LinkedHashSet<>();
+        for (int num : originalArray) {
+            set.add(num);
+        }
+        System.out.println("\nArray after removing duplicates:");
+        System.out.println(set);
+        sc.close();
+    }
+}
+//Matrix 1st row And last row swap 
+import java.util.Scanner;
+public class MatrixRowReverse {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] matrix = new int[3][3];
+        System.out.println("Enter 9 elements for the 3x3 matrix:");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        for (int j = 0; j < 3; j++) {
+            int temp = matrix[0][j];
+            matrix[0][j] = matrix[2][j];
+            matrix[2][j] = temp;
+        }
+        System.out.println("\nOutput:");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        sc.close();
+    }
+}
+//1D Array expected output{3,4,5,6,1,2}
+import java.util.Arrays;
+public class ArrayRotate {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+        int n = arr.length;
+        int d = 2;
+        int[] rotated = new int[n];
+        for (int i = 0; i < n; i++) {
+            rotated[i] = arr[(i + d) % n];
+        }
+        System.out.println(Arrays.toString(rotated));
+    }
+}
+//linked hash set
+import java.util.LinkedHashSet;
+public class SetExample {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> numbers = new LinkedHashSet<Integer>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+        System.out.println(numbers.contains(10));
+        numbers.remove(20);
+        System.out.println(numbers);
+    }
+}
+//hash set integer
+import java.util.HashSet;
+public class SetExample {
+    public static void main(String[] args) {
+        HashSet<Integer> numbers = new HashSet<Integer>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+        System.out.println(numbers.contains(10));
+        numbers.remove(20);
+        System.out.println(numbers);
+    }
+}
