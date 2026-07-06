@@ -1,0 +1,295 @@
+//Abstraction class
+import java.util.Scanner;
+abstract class Bank {
+    abstract void deposit(double amount);
+    abstract void withdraw(double amount);
+}
+class Customer extends Bank {
+    double balance = 1000; // Initial Balance
+    @Override
+    void deposit(double amount) {
+        balance += amount;
+        System.out.println("Amount Deposited: " + amount);
+        System.out.println("Current Balance: " + balance);
+    }
+    @Override
+    void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Amount Withdrawn: " + amount);
+            System.out.println("Current Balance: " + balance);
+        } else {
+            System.out.println("Insufficient Balance");
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Customer c = new Customer();
+
+        System.out.println("Initial Balance: 1000");
+
+        System.out.print("Enter Deposit Amount: ");
+        double deposit = sc.nextDouble();
+        c.deposit(deposit);
+
+        System.out.print("Enter Withdrawal Amount: ");
+        double withdraw = sc.nextDouble();
+        c.withdraw(withdraw);
+
+        sc.close();
+    }
+}
+// 1. The Abstract Class defining the "blueprint" of a bank account
+abstract class BankAccount {
+    protected String accountNumber;
+    protected double balance;
+
+    // Regular constructor
+    public BankAccount(String accountNumber, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+    }
+
+    // Concrete method: Common functionality shared by ALL accounts
+    public void displayBalance() {
+        System.out.println("Account: " + accountNumber + " | Current Balance: $" + balance);
+    }
+
+    // Abstract methods: Forcing subclasses to define their own specific logic
+    public abstract void deposit(double amount);
+    public abstract void withdraw(double amount);
+}
+
+// 2. Concrete Subclass for Savings Account
+class SavingsAccount extends BankAccount {
+    private static final double MINIMUM_BALANCE = 100.00;
+
+    public SavingsAccount(String accountNumber, double initialBalance) {
+        super(accountNumber, initialBalance);
+    }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited $" + amount + " to Savings Account.");
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        // Savings account specific logic: Enforce a strict minimum balance rule
+        if ((balance - amount) >= MINIMUM_BALANCE) {
+            balance -= amount;
+            System.out.println("Withdrew $" + amount + " from Savings Account.");
+        } else {
+            System.out.println("Transaction Denied: Savings accounts must maintain a $" + MINIMUM_BALANCE + " minimum balance.");
+        }
+    }
+}
+
+// 3. Concrete Subclass for Current (Checking) Account
+class CurrentAccount extends BankAccount {
+    private double overdraftLimit = 500.00; // Allows account to go negative
+
+    public CurrentAccount(String accountNumber, double initialBalance) {
+        super(accountNumber, initialBalance);
+    }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited $" + amount + " to Current Account.");
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        // Current account specific logic: Evaluate overdraft allowance instead of a minimum floor
+        if ((balance + overdraftLimit) >= amount) {
+            balance -= amount;
+            System.out.println("Withdrew $" + amount + " from Current Account.");
+        } else {
+            System.out.println("Transaction Denied: Overdraft limit exceeded.");
+        }
+    }
+}
+
+// 4. Execution Class simulating the ATM/Banking platform
+public class BankingSystem {
+    public static void main(String[] args) {
+        // Using the abstract parent type as a reference (Polymorphism)
+        BankAccount customerSavings = new SavingsAccount("SAV-9876", 150.00);
+        BankAccount customerCurrent = new CurrentAccount("CUR-1234", 200.00);
+
+        System.out.println("--- Executing Savings Operations ---");
+        customerSavings.displayBalance();
+        customerSavings.withdraw(100.00); // Will fail because it breaches the $100 min balance rule
+        
+        System.out.println("\n--- Executing Current Operations ---");
+        customerCurrent.displayBalance();
+        customerCurrent.withdraw(400.00); // Will pass because overdraft limit handles the -$200 depth
+        customerCurrent.displayBalance();
+    }
+}
+//EMI problem
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double acCost = 80000;
+        int months = 24;
+        System.out.print("Enter Current Year: ");
+        int year = sc.nextInt();
+        if (year == 2027) {
+            System.out.println("EMI is paused for the year 2027.");
+        } else {
+            System.out.print("Enter Amount Paid: ");
+            double amount = sc.nextDouble();
+            double interestRate;
+            if (amount >= 100000) {
+                interestRate = 5;
+            } else if (amount >= 50000) {
+                interestRate = 8;
+            } else if (amount >= 15000) {
+                interestRate = 12;
+            } else {
+                interestRate = 15;
+            }
+            double interest = (acCost * interestRate) / 100;
+            double totalAmount = acCost + interest;
+            double emi = totalAmount / months;
+            System.out.println("AC Cost         : " + acCost);
+            System.out.println("Interest Rate   : " + interestRate + "%");
+            System.out.println("Interest Amount : " + interest);
+            System.out.println("Total Amount    : " + totalAmount);
+            System.out.println("Monthly EMI     : " + emi);
+        }
+        sc.close();
+    }
+}
+//Car and bike problem
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of bikes: ");
+        int bikes = sc.nextInt();
+        System.out.print("Enter number of cars: ");
+        int cars = sc.nextInt();
+        int bikeTyres = bikes * 2;
+        int carTyres = cars * 4;
+        System.out.println("Bike Tyres = " + bikeTyres);
+        System.out.println("Car Tyres = " + carTyres);
+        System.out.println("Total Tyres = " + (bikeTyres + carTyres));
+
+        sc.close();
+    }
+}
+//ENUM
+enum Day {
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY,
+    FRIDAY, SATURDAY, SUNDAY
+}
+public class Main {
+    public static void main(String[] args) {
+        Day today = Day.FRIDAY;
+        System.out.println("Today is: " + today);
+        switch (today) {
+            case MONDAY:
+                System.out.println("Start of the week");
+                break;
+            case FRIDAY:
+                System.out.println("Weekend is coming");
+                break;
+            case SUNDAY:
+                System.out.println("Holiday");
+                break;
+            default:
+                System.out.println("Regular Working Day");
+        }
+    }
+}
+//Collection of datas
+import java.util.ArrayList;
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<String> students = new ArrayList<>();
+        students.add("Sathwika");
+        students.add("Rahul");
+        students.add("Priya");
+        students.add("Kiran");
+        System.out.println("Student Names:");
+        for (String name : students) {
+            System.out.println(name);
+        }
+    }
+}
+// Encapsulation Example: Bank Account
+public class BankAccount {
+    // Private fields (data hiding)
+    private String accountHolderName;
+    private double balance;
+
+    // Constructor
+    public BankAccount(String accountHolderName, double initialBalance) {
+        this.accountHolderName = accountHolderName;
+        if (initialBalance >= 0) {
+            this.balance = initialBalance;
+        } else {
+            this.balance = 0;
+            System.out.println("Initial balance cannot be negative. Set to 0.");
+        }
+    }
+
+    // Public getter for account holder name
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    // Public getter for balance (read-only)
+    public double getBalance() {
+        return balance;
+    }
+
+    // Public method to deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: " + amount);
+        } else {
+            System.out.println("Deposit amount must be positive.");
+        }
+    }
+
+    // Public method to withdraw money
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrew: " + amount);
+        } else if (amount > balance) {
+            System.out.println("Insufficient balance.");
+        } else {
+            System.out.println("Withdrawal amount must be positive.");
+        }
+    }
+
+    // Main method to test the class
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount("John Doe", 5000);
+
+        // Accessing data via public methods
+        System.out.println("Account Holder: " + account.getAccountHolderName());
+        System.out.println("Initial Balance: " + account.getBalance());
+
+        account.deposit(1500);
+        System.out.println("Balance after deposit: " + account.getBalance());
+
+        account.withdraw(2000);
+        System.out.println("Balance after withdrawal: " + account.getBalance());
+
+        // Trying invalid operations
+        account.deposit(-500);
+        account.withdraw(10000);
+    }
+}
