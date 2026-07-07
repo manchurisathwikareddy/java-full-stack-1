@@ -1,0 +1,286 @@
+// Parent Class
+class Parent {
+    void parentsDetails() {
+        System.out.println("Father Name : Ashok Reddy");
+        System.out.println("Mother Name : Shoba");
+    }
+}
+class Child extends Parent {
+    void childrenDetails() {
+        System.out.println("My Name      : Sathwika Reddy");
+        System.out.println("Brother Name : Nithin Reddy");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.parentsDetails();
+        obj.childrenDetails();
+    }
+}
+//Car
+class Vehicle {
+    Vehicle() {
+        System.out.println("This is a Vehicle");
+    }
+}
+class FourWheeler extends Vehicle {
+    FourWheeler()  {
+        System.out.println("4 Wheeler Vehicles");
+    }
+}
+class Car extends FourWheeler {
+    Car() {
+        System.out.println("This 4 Wheeler Vehicle is a Car");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Car obj = new Car();
+    }
+}
+import java.util.Scanner;
+
+// Base class (Level 1)
+class Person {
+    protected String name;
+    protected int age;
+
+    // Method to input person details
+    public void inputPersonDetails(Scanner sc) {
+        System.out.print("Enter name: ");
+        name = sc.nextLine().trim();
+
+        // Validate age input
+        while (true) {
+            System.out.print("Enter age: ");
+            if (sc.hasNextInt()) {
+                age = sc.nextInt();
+                sc.nextLine(); // consume newline
+                if (age > 0) break;
+                else System.out.println("Age must be positive.");
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                sc.nextLine(); // clear invalid input
+            }
+        }
+    }
+
+    public void displayPersonDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+}
+
+// Derived class (Level 2)
+class Employee extends Person {
+    protected String employeeId;
+
+    public void inputEmployeeDetails(Scanner sc) {
+        inputPersonDetails(sc); // Call base class method
+        System.out.print("Enter Employee ID: ");
+        employeeId = sc.nextLine().trim();
+    }
+
+    public void displayEmployeeDetails() {
+        displayPersonDetails();
+        System.out.println("Employee ID: " + employeeId);
+    }
+}
+
+// Derived class from Employee (Level 3)
+class Manager extends Employee {
+    private String department;
+
+    public void inputManagerDetails(Scanner sc) {
+        inputEmployeeDetails(sc); // Call parent method
+        System.out.print("Enter Department: ");
+        department = sc.nextLine().trim();
+    }
+
+    public void displayManagerDetails() {
+        displayEmployeeDetails();
+        System.out.println("Department: " + department);
+    }
+}
+
+// Main class
+public class MultilevelInheritanceDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Create Manager object (inherits from Employee -> Person)
+        Manager mgr = new Manager();
+
+        System.out.println("=== Enter Manager Details ===");
+        mgr.inputManagerDetails(sc);
+
+        System.out.println("\n=== Manager Information ===");
+        mgr.displayManagerDetails();
+
+        sc.close();
+    }
+}
+// Multiple Inheritance & Multilevel Inheritance
+import java.util.Scanner;
+
+// Multiple Inheritance using Interfaces
+interface Deposit {
+    void deposit(double amount);
+}
+
+interface Debit {
+    void debit(double amount);
+}
+
+// Parent Class
+class BankAccount implements Deposit, Debit {
+    protected double balance = 10000;
+    protected int pin = 1234;
+
+    public void createPin(int newPin) {
+        pin = newPin;
+        System.out.println("PIN Created Successfully.");
+    }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited Amount: " + amount);
+    }
+
+    @Override
+    public void debit(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Debited Amount: " + amount);
+        } else {
+            System.out.println("Insufficient Balance");
+        }
+    }
+}
+
+// Child Class (Multilevel Inheritance)
+class Transaction extends BankAccount {
+
+    public void transactionHistory() {
+        System.out.println("Transaction Completed Successfully.");
+    }
+}
+
+// Grandchild Class
+class Balance extends Transaction {
+
+    public void availableBalance() {
+        System.out.println("Available Balance: " + balance);
+    }
+}
+
+// Main Class
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        Balance user = new Balance();
+
+        System.out.print("Create a New PIN: ");
+        int newPin = sc.nextInt();
+        user.createPin(newPin);
+
+        System.out.print("Enter Deposit Amount: ");
+        double deposit = sc.nextDouble();
+        user.deposit(deposit);
+
+        System.out.print("Enter Debit Amount: ");
+        double debit = sc.nextDouble();
+        user.debit(debit);
+
+        user.transactionHistory();
+        user.availableBalance();
+
+        sc.close();
+    }
+}
+//Bank application question
+class Bank {
+    private int balance = 100;
+
+    public synchronized void withdraw(String customerName, int amount) {
+        if (balance >= amount) {
+            System.out.println(customerName + " withdrawn " + amount);
+            balance -= amount;
+            System.out.println("Balance: " + balance);
+        } else {
+            System.out.println(customerName + " you can not withdraw " + amount);
+            System.out.println("Your balance is: " + balance);
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
+    }
+
+    public synchronized void deposit(String customerName, int amount) {
+        balance += amount;
+        System.out.println(customerName + " deposited " + amount);
+        System.out.println("Balance after deposit: " + balance);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
+    }
+}
+
+class ThreadWithdrawal extends Thread {
+    Bank bank;
+    String name;
+    int amount;
+
+    ThreadWithdrawal(Bank bank, String name, int amount) {
+        this.bank = bank;
+        this.name = name;
+        this.amount = amount;
+    }
+
+    public void run() {
+        bank.withdraw(name, amount);
+    }
+}
+
+class ThreadDeposit extends Thread {
+    Bank bank;
+    String name;
+    int amount;
+
+    ThreadDeposit(Bank bank, String name, int amount) {
+        this.bank = bank;
+        this.name = name;
+        this.amount = amount;
+    }
+
+    public void run() {
+        bank.deposit(name, amount);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Bank bank = new Bank();
+
+        ThreadWithdrawal t1 = new ThreadWithdrawal(bank, "Arnab", 20);
+        ThreadWithdrawal t2 = new ThreadWithdrawal(bank, "Monodwip", 40);
+        ThreadDeposit t3 = new ThreadDeposit(bank, "Mukta", 35);
+        ThreadWithdrawal t4 = new ThreadWithdrawal(bank, "Rinkel", 80);
+        ThreadWithdrawal t5 = new ThreadWithdrawal(bank, "Shubham", 40);
+
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+        t5.start();
+    }
+}
