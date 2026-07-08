@@ -164,3 +164,67 @@ public class Main {
         }
     }
 }
+//ReverseString
+public class ReverseString {
+    public static void main(String[] args) {
+        String input = "Hello World";
+        String reversed = reverseString(input);
+        
+        System.out.println("Original: " + input);
+        System.out.println("Reversed: " + reversed);
+    }
+
+    public static String reverseString(String str) {
+        // StringBuilder is efficient for string manipulation
+        StringBuilder sb = new StringBuilder();
+        
+        // Loop starting from the last index, decrementing down to 0
+        for (int i = str.length() - 1; i >= 0; i--) {
+            sb.append(str.charAt(i));
+        }
+        
+        return sb.toString();
+    }
+}
+//Remove Special character
+public class RemoveSpecialChars {
+    public static void main(String[] args) {
+        String input = "Hello@World$#2026!";
+        
+        // The regex [^a-zA-Z0-9] means "anything that is NOT a letter or a digit"
+        String result = input.replaceAll("[^a-zA-Z0-9]", "");
+        
+        System.out.println("Original: " + input);
+        System.out.println("Cleaned: " + result);
+    }
+}
+// Thread create 
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+
+        int[] freq = new int[256];
+
+        // Count only letters
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (Character.isLetter(ch)) {
+                freq[ch]++;
+            }
+        }
+
+        // Find first non-repeating letter
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (Character.isLetter(ch) && freq[ch] == 1) {
+                System.out.print(ch);
+                return;
+            }
+        }
+
+        System.out.print("All characters are repetitive");
+    }
+}
