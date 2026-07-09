@@ -1,0 +1,163 @@
+class Main{
+    public static void main(String[] args){
+        int n = 10;
+        int m = 4;
+        try{
+            int ans = n / m;
+            System.out.println("Answer: " + ans);
+        } catch (ArithmeticException e){
+            System.out.println("Error:Division by 0!");
+        }
+    }
+}
+//Exception Caught
+class Main{
+    public static void main(String[] args){
+        int[] numbers = {1,2,3};
+        try{
+            System.out.println(numbers[5]);
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Exception caught: " + e);
+        }
+        finally{
+            System.out.println("This block always excutes: ");
+        }
+        System.out.println("Program continues...");
+    }
+}
+// multiple try and one caughts
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        double balance = 10000;
+
+        // Deposit
+        try {
+            System.out.print("Enter Deposit Amount: ");
+            double deposit = sc.nextDouble();
+
+            if (deposit < 0) {
+                throw new Exception("Deposit amount cannot be negative.");
+            }
+
+            balance += deposit;
+            System.out.println("Deposit Successful.");
+            System.out.println("Balance: " + balance);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Withdrawal
+        try {
+            System.out.print("\nEnter Withdrawal Amount: ");
+            double withdraw = sc.nextDouble();
+
+            if (withdraw < 0) {
+                throw new Exception("Withdrawal amount cannot be negative.");
+            }
+
+            if (withdraw > balance) {
+                throw new Exception("Insufficient Balance.");
+            }
+
+            balance -= withdraw;
+            System.out.println("Withdrawal Successful.");
+            System.out.println("Balance: " + balance);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Credit
+        try {
+            System.out.print("\nEnter Credit Amount: ");
+            double credit = sc.nextDouble();
+
+            if (credit < 0) {
+                throw new Exception("Credit amount cannot be negative.");
+            }
+
+            balance += credit;
+            System.out.println("Credit Successful.");
+            System.out.println("Balance: " + balance);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Available Balance
+        try {
+            if (balance < 0) {
+                throw new Exception("Balance cannot be negative.");
+            }
+
+            System.out.println("\nAvailable Balance: " + balance);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        sc.close();
+    }
+}
+//One Try method and multiple Caugths
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        double balance = 10000;
+
+        try {
+
+            System.out.print("Enter Deposit Amount: ");
+            double deposit = sc.nextDouble();
+
+            if (deposit < 0)
+                throw new ArithmeticException("Negative Deposit Amount");
+
+            balance += deposit;
+
+            System.out.print("Enter Withdrawal Amount: ");
+            double withdraw = sc.nextDouble();
+
+            if (withdraw < 0)
+                throw new ArithmeticException("Negative Withdrawal Amount");
+
+            if (withdraw > balance)
+                throw new ArithmeticException("Insufficient Balance");
+
+            balance -= withdraw;
+
+            System.out.print("Enter Credit Amount: ");
+            double credit = sc.nextDouble();
+
+            if (credit < 0)
+                throw new ArithmeticException("Negative Credit Amount");
+
+            balance += credit;
+
+            System.out.println("Available Balance: " + balance);
+
+        }
+        catch (InputMismatchException e) {
+            System.out.println("Invalid Input! Please enter numbers only.");
+        }
+        catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+        }
+        catch (Exception e) {
+            System.out.println("Unknown Error");
+        }
+
+        sc.close();
+    }
+}
